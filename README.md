@@ -11,7 +11,7 @@
 ## 3. Challenge Walkthrough
 
 ### 3.1 Room Name: Network Services
-- **Objective**: Access the target's assets by exploiting vulnerable services to exfiltrate valuable data
+- **Objective**: Access the target's assets by exploiting vulnerable services to access valuable data
 
 ### 3.2 Enumeration
 - **Initial Scanning**:
