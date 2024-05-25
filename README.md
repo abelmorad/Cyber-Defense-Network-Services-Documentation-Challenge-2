@@ -55,12 +55,12 @@
 
 
 ## 4. Analysis and Reflection
-- **Challenges Faced**: Difficulty in identifying the exact version of Apache.
-- **Learnings**: Importance of thorough enumeration.
-- **Improvements**: Try alternative enumeration techniques earlier.
+- **Challenges Faced**: Error with my configuration of kali and openvpn not being able to connect to the server
+- **Learnings**: I Learned that telnet is unsecured because it has a lot of vulnerabilities when I checked CVE 
+- **Improvements**: Familiarize with the commands 
 
 ## 5. Conclusion
-- **Summary**: Successfully gained root access and captured the flag
+- **Summary**: Successfully gained access to the telnet server by exploiting its vulnerability and using reverse shell payload to capture the flag
 
 ## 6. References
 - [TryHackMe](https://tryhackme.com)
