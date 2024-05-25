@@ -1,4 +1,4 @@
-![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/f979b8e5-5f41-42d5-8bf0-a02f863ecc8c)![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/102683de-0cb6-454e-87cd-c3479e87a596)# Documentation: TryHackMe Cyber Defense #02
+# Documentation: TryHackMe Cyber Defense #02
 
 ## 1. Introduction
 - **Purpose**: Document my experience and share knowledge on the Cyber Defense challenges
