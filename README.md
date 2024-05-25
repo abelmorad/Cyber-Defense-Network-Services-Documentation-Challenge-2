@@ -1,4 +1,4 @@
-# Documentation: TryHackMe Cyber Defense #02
+# Documentation: TryHackMe - Exploiting Telnet #02
 
 ## 1. Introduction
 - **Purpose**: Document my experience and share knowledge on the Cyber Defense challenges
